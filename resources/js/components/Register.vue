@@ -46,8 +46,8 @@
 </template>
 
 
-	<script>
-		import { mapActions } from 'vuex'
+<script>
+import { mapActions } from 'vuex'
 export default {
     name:'register',
     data(){
@@ -67,8 +67,14 @@ export default {
         }),
         async register(){
             this.processing = true
-            await axios.post('/register',this.user).then(response=>{
+
+			console.log("Registered - ", this.user);
+
+			await axios.post('/register',this.user).then(response=>{
                 this.signIn()
+
+
+
             }).catch(({response:{data}})=>{
                 alert(data.message)
             }).finally(()=>{
@@ -77,4 +83,4 @@ export default {
         }
     }
 }
-	</script>
+</script>

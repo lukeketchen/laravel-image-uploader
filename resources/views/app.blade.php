@@ -6,34 +6,32 @@
 
         <title>Laravel Image Uploader</title>
 
-		<style rel="stylesheet" href="{{ mix('css/app.css') }}" defer></style>
+		<link rel="stylesheet" href="{{ url('css/app.css') }}">
 
     </head>
     <body class="antialiased">
 		<div id="app">
-			<div class="container">
-				<header>
-					<h1>Laravel Image Uploader</h1>
-				</header>
+			<div class="container mt-5">
+				<div class="row text-center">
+					<header>
+						<h1>Laravel Image Uploader</h1>
+					</header>
+				</div>
 
 				<main>
 					<aside>
-						<hr>
-						<div class="nav">
-							<div class="col">
-								<router-link to="/">Home</router-link>
-								<router-link :to="{ name: 'profile' }">Profile</router-link>
-								<router-link :to="{ name: 'upload' }">Upload Image</router-link>
-							</div>
-							<div class="col">
-								<router-link :to="{ name: 'login' }">Login</router-link>
-								<router-link :to="{ name: 'register' }">Register</router-link>
-							</div>
-						</div>
+						<ul class="nav">
+							<li class="nav-item">
+								<router-link to="/" class="nav-link">Home</router-link>
+							</li>
+							<li class="nav-item">
+								<router-link :to="{ name: 'upload' }" class="nav-link">Upload Image</router-link>
+							</li>
+						</ul>
 						<hr>
 					</aside>
 
-					<div class="primary">
+					<div class="container">
 						<router-view></router-view>
 					</div>
 				</main>
