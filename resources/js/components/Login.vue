@@ -11,12 +11,12 @@
 								<label for="email" class="font-weight-bold">Email</label>
 								<input type="text" v-model="auth.email" name="email" id="email" class="form-control">
 							</div>
-							<div class="form-group col-12">
+							<div class="form-group col-12 mt-2">
 								<label for="password" class="font-weight-bold">Password</label>
 								<input type="password" v-model="auth.password" name="password" id="password"
 									class="form-control">
 							</div>
-							<div class="col-12 mb-2">
+							<div class="col-12 mb-2 mt-4">
 								<button type="submit" :disabled="processing" @click="login"
 									class="btn btn-primary btn-block">
 									{{ processing ? "Please wait" : "Login" }}

@@ -27,11 +27,11 @@ Route::post('logout', [App\Http\Controllers\API\AuthController::class, 'logout']
 
 
 
-// Route::get('posts', "PostController@index"); // List Posts
-// Route::post('posts', "PostController@store"); // Create Post
-// Route::get('posts/{id}', "PostController@show"); // Detail of Post
-// Route::put('posts/{id}', "PostController@update"); // Update Post
-// Route::delete('posts/{id}', "PostController@destroy"); //Delete Post
+Route::get('posts', "PostController@index"); // List Posts
+Route::post('posts', "PostController@store"); // Create Post
+Route::get('posts/{id}', "PostController@show"); // Detail of Post
+Route::put('posts/{id}', "PostController@update"); // Update Post
+Route::delete('posts/{id}', "PostController@destroy"); //Delete Post
 
 
 

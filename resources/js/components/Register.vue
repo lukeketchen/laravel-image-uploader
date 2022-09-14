@@ -7,28 +7,34 @@
 						<h1 class="text-center">Register</h1>
 						<hr />
 						<form action="javascript:void(0)" @submit="register" class="row" method="post">
+							<p v-if="errors.length">
+								<b>Please correct the following error(s):</b>
+							<ul>
+								<li v-for="error in errors">{{ error }}</li>
+							</ul>
+							</p>
 							<div class="form-group col-12">
 								<label for="name" class="font-weight-bold">Name</label>
 								<input type="text" name="name" v-model="user.name" id="name" placeholder="Enter name"
 									class="form-control">
 							</div>
-							<div class="form-group col-12">
+							<div class="form-group col-12 mt-2">
 								<label for="email" class="font-weight-bold">Email</label>
 								<input type="text" name="email" v-model="user.email" id="email"
 									placeholder="Enter Email" class="form-control">
 							</div>
-							<div class="form-group col-12">
+							<div class="form-group col-12 mt-2">
 								<label for="password" class="font-weight-bold">Password</label>
 								<input type="password" name="password" v-model="user.password" id="password"
 									placeholder="Enter Password" class="form-control">
 							</div>
-							<div class="form-group col-12">
+							<div class="form-group col-12 mt-2">
 								<label for="password_confirmation" class="font-weight-bold">Confirm Password</label>
-								<input type="password_confirmation" name="password_confirmation"
+								<input type="password" name="password_confirmation"
 									v-model="user.password_confirmation" id="password_confirmation"
 									placeholder="Enter Password" class="form-control">
 							</div>
-							<div class="col-12 mb-2">
+							<div class="col-12 mb-2 mt-4">
 								<button type="submit" :disabled="processing" class="btn btn-primary btn-block">
 									{{ processing ? "Please wait" : "Register" }}
 								</button>
@@ -53,33 +59,55 @@ export default {
     data(){
         return {
             user:{
-                name:"",
-                email:"",
-                password:"",
-                password_confirmation:""
+                name:null,
+                email:null,
+                password:null,
+                password_confirmation:null
             },
-            processing:false
+            processing:false,
+			errors: []
         }
     },
     methods:{
         ...mapActions({
             signIn:'auth/login'
         }),
-        async register(){
+		async register(){
             this.processing = true
+            this.errors = []
+			let validated = true;
 
-			console.log("Registered - ", this.user);
+			if (this.user['name'] == null) {
+				this.errors.push('Name required.');
+				validated = false;
+			} else if (this.user['email'] == null){
+				this.errors.push('Email required.');
+				validated = false;
+			} else if (this.user['password'] == null) {
+				this.errors.push('Password required.');
+				validated = false;
+			} else if (this.user['password_confirmation'] == null) {
+				this.errors.push('Confirmed Password required.');
+				validated = false;
+			}
 
-			await axios.post('/register',this.user).then(response=>{
-                this.signIn()
 
+			if (validated){
+				await axios.post('/register',this.user).then(response=>{
 
+					// TODO -
+					// [ ] check this is actually setting
+					// look like it is setting the user object but must not be connecting
+					this.signIn()
 
-            }).catch(({response:{data}})=>{
-                alert(data.message)
-            }).finally(()=>{
-                this.processing = false
-            })
+				}).catch(({response:{data}})=>{
+					alert(data.message)
+				}).finally(()=>{
+					this.processing = false
+				})
+			} else{
+				this.processing = false
+			}
         }
     }
 }
