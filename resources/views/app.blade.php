@@ -19,18 +19,6 @@
 				</div>
 
 				<main>
-					<aside>
-						<ul class="nav">
-							<li class="nav-item">
-								<router-link to="/" class="nav-link">Profile</router-link>
-							</li>
-							<li class="nav-item">
-								<router-link :to="{ name: 'upload' }" class="nav-link">Upload Image</router-link>
-							</li>
-						</ul>
-						<hr>
-					</aside>
-
 					<div class="container">
 						<router-view></router-view>
 					</div>

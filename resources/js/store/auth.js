@@ -25,12 +25,20 @@ export default {
         }
     },
     actions:{
-        login({commit}){
-            // return axios.get('/api/user').then(({data})=>{
-            return axios.get('/api/login').then(({data})=>{
-                commit('SET_USER',data)
+        login({commit}, user){
+            // return axios.get('/api/profile').then(({data})=>{
+            return axios.get('/api/login', user).then(response=>{
+                commit('SET_USER',user)
                 commit('SET_AUTHENTICATED',true)
                 router.push({name:'profile'})
+
+				// TODO -
+				// [ ] check why returning html not json as the data object
+				// [-] might be CORS - not CORS issue
+				//
+				// console.log('auth login function');
+				// console.log('check user - ', user);
+
             }).catch(({response:{data}})=>{
                 commit('SET_USER',{})
                 commit('SET_AUTHENTICATED',false)

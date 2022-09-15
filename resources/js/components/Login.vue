@@ -1,5 +1,5 @@
 <template>
-	<div class="container h-100">
+	<div class="container h-100 mt-5">
 		<div class="row h-100 align-items-center">
 			<div class="col-12 col-md-6 offset-md-3">
 				<div class="card shadow sm">
@@ -36,7 +36,7 @@
 
 
 <script>
-	import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
     name:"login",
     data(){
@@ -55,8 +55,15 @@ export default {
         async login(){
             this.processing = true
             await axios.get('/sanctum/csrf-cookie')
-            await axios.post('/login',this.auth).then(({data})=>{
-                this.signIn()
+            await axios.post('/api/login',this.auth).then(response=>{
+
+				// check if the responce is the token and message
+				// console.log('Login response - ', response);
+
+				// this.signIn(this.auth)
+				this.signIn(response.data.user)
+
+
             }).catch(({response:{data}})=>{
                 alert(data.message)
             }).finally(()=>{

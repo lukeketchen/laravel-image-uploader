@@ -1,5 +1,5 @@
 <template>
-	<div class="container h-100">
+	<div class="container h-100 mt-5">
 		<div class="row h-100 align-items-center">
 			<div class="col-12 col-md-6 offset-md-3">
 				<div class="card shadow sm">
@@ -93,12 +93,15 @@ export default {
 
 
 			if (validated){
-				await axios.post('/register',this.user).then(response=>{
+				await axios.post('/api/register', this.user).then(response =>{
 
 					// TODO -
-					// [ ] check this is actually setting
+					// [x] check this is actually setting
 					// look like it is setting the user object but must not be connecting
-					this.signIn()
+					// console.log('Register response - ', response);
+					// found this to work now, looking at the headers it was successfull
+
+					this.signIn(response.data.user)
 
 				}).catch(({response:{data}})=>{
 					alert(data.message)

@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
+Route::middleware('auth:sanctum')->get('/profile', function (Request $request) {
+    return $request->user();
+});
+
+
 // Auth
 Route::post('login', [App\Http\Controllers\API\AuthController::class, 'login']);
 Route::post('register', [App\Http\Controllers\API\AuthController::class, 'register']);

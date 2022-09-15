@@ -6,12 +6,12 @@ import auth from './auth'
 // Vue.use(Vuex)
 
 export default createStore({
-	state: {
-    },
-    mutations: {
-    },
-    actions: {
-    },
+	// state: {
+    // },
+    // mutations: {
+    // },
+    // actions: {
+    // },
     plugins:[
         createPersistedState()
     ],

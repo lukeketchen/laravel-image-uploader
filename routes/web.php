@@ -20,3 +20,11 @@ Route::get('/{any?}', function () {
 Route::post('/{any?}', function () {
     return view('app');
 });
+
+
+
+// Route::group(['middleware' => ['auth']], function () {
+//   Route::get('/', function(){
+//       return view('app')
+//   });
+// });
